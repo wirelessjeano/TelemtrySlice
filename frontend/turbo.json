@@ -1,0 +1,32 @@
+{
+    "$schema": "https://turborepo.dev/schema.json",
+    "globalDependencies": [
+        "yarn.lock"
+    ],
+    "globalEnv": ["NEXT_APP_API_URL", "NEXT_APP_WRITER_URL"],
+    "tasks": {
+        "build": {
+            "dependsOn": [
+                "^build"
+            ],
+            "outputs": [
+                ".next/**",
+                "!.next/cache/**"
+            ]
+        },
+        "clean": {
+            "dependsOn": [
+                "^clean"
+            ]
+        },
+        "check-types": {
+            "dependsOn": [
+                "^check-types"
+            ]
+        },
+        "dev": {
+            "persistent": true,
+            "cache": false
+        }
+    }
+}

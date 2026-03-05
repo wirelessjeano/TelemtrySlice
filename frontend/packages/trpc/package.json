@@ -1,0 +1,38 @@
+{
+  "name": "@telemetryslice/trpc",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./server": {
+      "types": "./server/index.ts",
+      "default": "./server/index.ts"
+    },
+    "./react": {
+      "types": "./react/index.ts",
+      "default": "./react/index.ts"
+    }
+  },
+  "devDependencies": {
+    "@tanstack/react-query": "^5.90.18",
+    "@telemetryslice/tsconfig": "workspace:^",
+    "@trpc/client": "^11.8.1",
+    "@trpc/react-query": "^11.8.1",
+    "@trpc/server": "^11.8.1",
+    "react": "^18",
+    "react-dom": "^18",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@telemetryslice/domain": "workspace:^",
+    "zod": "^4.3.6"
+  },
+  "peerDependencies": {
+    "@tanstack/react-query": "^5.0.0",
+    "@trpc/client": "^11.0.0",
+    "@trpc/react-query": "^11.0.0",
+    "@trpc/server": "^11.0.0",
+    "next": ">=14.0.0",
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  }
+}

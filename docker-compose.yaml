@@ -1,0 +1,102 @@
+version: '3'
+
+services:
+  ui:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: telemetryslice.ui:v0.0.13
+    ports:
+      - "3001:3000"
+    environment:
+      - NEXT_APP_API_URL=http://api:8080
+      - NEXT_APP_WRITER_URL=http://writer:8080
+    depends_on:
+      - api
+      - writer
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: TelemetrySlice.App.API/Dockerfile
+    image: telemetryslice.api:v0.0.13
+    ports:
+      - "5247:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ConnectionStrings__RedisConnection=redis:6379,allowAdmin=true
+      - ConnectionStrings__RabbitConnection=host=rabbitmq;username=rabbitmq;password=rabbitmq;port=5672
+      - ConnectionStrings__DefaultConnection=Data Source=/app/data/iot.db;Cache=Shared;Default Timeout=5;
+      - ConnectionStrings__RabbitHealthCheckUri=amqp://rabbitmq:rabbitmq@rabbitmq:5672
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+  writer:
+    build:
+      context: ./backend
+      dockerfile: TelemetrySlice.App.Writer/Dockerfile
+    image: telemetryslice.writer:v0.0.13
+    ports:
+      - "5248:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Docker
+      - ConnectionStrings__RedisConnection=redis:6379,allowAdmin=true
+      - ConnectionStrings__RabbitConnection=host=rabbitmq;username=rabbitmq;password=rabbitmq;port=5672
+      - ConnectionStrings__DefaultConnection=Data Source=/app/data/iot.db;Cache=Shared;Default Timeout=5;
+      - ConnectionStrings__RabbitHealthCheckUri=amqp://rabbitmq:rabbitmq@rabbitmq:5672
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      api:
+        condition: service_started
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+  redis:
+    image: bitnami/redis:latest
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - BITNAMI_DEBUG=true
+    ports:
+      - '6379:6379'
+    expose:
+      - 6379
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  rabbitmq:
+    hostname: rabbitmq
+    image: "rabbitmq:3.7.14-management-alpine"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    volumes:
+      - "./.config/rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins"
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "check_port_connectivity"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+volumes:
+  redis_data:
+  rabbitmq_data:

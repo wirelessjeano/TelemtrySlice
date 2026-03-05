@@ -1,0 +1,39 @@
+{
+  "name": "@telemetryslice/domain",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": {
+      "types": "./index.ts",
+      "default": "./index.ts"
+    },
+    "./health": {
+      "types": "./health/index.ts",
+      "default": "./health/index.ts"
+    },
+    "./customer": {
+      "types": "./customer/index.ts",
+      "default": "./customer/index.ts"
+    },
+    "./device": {
+      "types": "./device/index.ts",
+      "default": "./device/index.ts"
+    },
+    "./device-chart": {
+      "types": "./device-chart/index.ts",
+      "default": "./device-chart/index.ts"
+    },
+    "./device-metrics": {
+      "types": "./device-metrics/index.ts",
+      "default": "./device-metrics/index.ts"
+    },
+    "./telemetry-event": {
+      "types": "./telemetry-event/index.ts",
+      "default": "./telemetry-event/index.ts"
+    }
+  },
+  "devDependencies": {
+    "@telemetryslice/tsconfig": "workspace:^",
+    "typescript": "^5.9.3"
+  }
+}

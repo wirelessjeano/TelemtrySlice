@@ -1,0 +1,76 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1030px;
+  --breakpoint-xl: 1280px;
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+  width: 100%;
+
+  @media (width >=theme(--breakpoint-sm)) {
+    max-width: 1100px;
+  }
+
+  @media (width >=theme(--breakpoint-md)) {
+    max-width: 1200px;
+  }
+
+  @media (width >=theme(--breakpoint-lg)) {
+    max-width: 1300px;
+  }
+
+  @media (width >=theme(--breakpoint-xl)) {
+    max-width: 1280px;
+  }
+}
+
+@plugin "daisyui";
+
+
+@plugin "daisyui/theme" {
+  name: "packSpinner";
+  default: true;
+  prefersdark: true;
+  color-scheme: "dark";
+  --color-base-100: oklch(28.822% 0.022 277.508);
+  --color-base-200: oklch(26.805% 0.02 277.508);
+  --color-base-300: oklch(32% 0.022 277.508);
+  --color-base-content: oklch(97.747% 0.007 106.545);
+  --color-primary: oklch(0.6626 0.1358 246.81);
+  --color-primary-content: oklch(15.092% 0.036 346.812);
+  --color-secondary: oklch(0.7096 0.1434 154.53);
+  --color-secondary-content: oklch(14.84% 0.029 301.883);
+  --color-accent: oklch(83.392% 0.124 66.558);
+  --color-accent-content: oklch(16.678% 0.024 66.558);
+  --color-neutral: oklch(39.445% 0.032 275.524);
+  --color-neutral-content: oklch(87.889% 0.006 275.524);
+  --color-info: oklch(88.263% 0.093 212.846);
+  --color-info-content: oklch(17.652% 0.018 212.846);
+  --color-success: oklch(87.099% 0.219 148.024);
+  --color-success-content: oklch(17.419% 0.043 148.024);
+  --color-warning: oklch(95.533% 0.134 112.757);
+  --color-warning-content: oklch(19.106% 0.026 112.757);
+  --color-error: oklch(68.22% 0.206 24.43);
+  --color-error-content: oklch(13.644% 0.041 24.43);
+  --radius-selector: 1rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+
+body {
+  /* background: var(--background);
+  color: var(--foreground); */
+  font-family: Urbanist, sans-serif;
+}

@@ -1,0 +1,30 @@
+@host = http://localhost:5147
+
+POST {{host}}/admin/seed
+Accept: application/json
+
+###
+
+GET {{host}}/customers
+Accept: application/json
+
+###
+
+GET {{host}}/devices/acme-123
+Accept: application/json
+
+###
+
+POST {{host}}/sensors/acme-123
+Content-Type: application/json
+
+[
+  {
+    "eventId": "evt-001",
+    "deviceId": "dev-001",
+    "recordedAt": "2026-03-01T12:00:00Z",
+    "value": 42.5
+  }
+]
+
+###

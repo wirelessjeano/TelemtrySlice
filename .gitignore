@@ -1,0 +1,12 @@
+
+.DS_Store
+
+data/iot.db
+data/iot.db-shm
+data/iot.db-wal
+backend/.idea/
+
+**/bin/
+**/obj/
+
+backend/TelemetrySlice.sln.DotSettings.user

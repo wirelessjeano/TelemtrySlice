@@ -1,0 +1,15 @@
+{
+    "extends": "@telemetryslice/tsconfig/react-library.json",
+    "include": [
+        "."
+    ],
+    "exclude": [
+        "**/node_modules/**"
+    ],
+    "compilerOptions": {
+        "noEmit": true,
+        "declaration": false,
+        "declarationMap": false,
+        "moduleResolution": "bundler"
+    }
+}

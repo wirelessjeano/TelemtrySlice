@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "DefaultConnection" : "Data Source=../../data/iot.db;Cache=Shared;Default Timeout=5;"
+  }
+}

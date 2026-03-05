@@ -1,0 +1,27 @@
+{
+    "extends": "@telemetryslice/tsconfig/react-library.json",
+    "include": [
+        "./server",
+        "./react",
+    ],
+    "exclude": [
+        "**/node_modules/**"
+    ],
+    "compilerOptions": {
+        "isolatedModules": false,
+        "noEmit": true,
+        "declaration": false,
+        "experimentalDecorators": true,
+        "declarationMap": false,
+        "resolveJsonModule": true,
+        "moduleResolution": "node",
+        "paths": {
+            "~/*": [
+                "./*"
+            ],
+            "@trpc/react-query/dist/*": [
+                "../../node_modules/@trpc/react-query/dist/*"
+            ]
+        }
+    }
+}
