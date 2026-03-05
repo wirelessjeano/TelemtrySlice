@@ -11,14 +11,14 @@ COPY packages/tsconfig/package.json packages/tsconfig/package.json
 COPY packages/trpc/package.json packages/trpc/package.json
 COPY packages/domain/package.json packages/domain/package.json
 
-RUN npm install -g yarn@4.12.0
+RUN corepack enable && corepack prepare yarn@4.12.0 --activate
 RUN yarn install --immutable
 
 # --- Builder ---
 FROM base AS builder
 WORKDIR /app
 
-RUN npm install -g yarn@4.12.0
+RUN corepack enable && corepack prepare yarn@4.12.0 --activate
 
 COPY --from=deps /app/ ./
 COPY . .

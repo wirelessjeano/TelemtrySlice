@@ -1,5 +1,5 @@
 buildui:
-	docker build -t telemetryslice.ui:v0.0.1 -f frontend/Dockerfile frontend
+	docker build -t telemetryslice.ui:v0.0.14 -f frontend/Dockerfile frontend
 
 run:
 	docker run -p 3001:3000 telemetryslice.ui:v0.0.1
