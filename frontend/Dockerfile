@@ -5,21 +5,20 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-COPY package.json yarn.lock .yarnrc.yml ./
-COPY .yarn .yarn
+COPY .yarnrc.yml package.json yarn.lock ./
 COPY apps/next/package.json apps/next/package.json
 COPY packages/tsconfig/package.json packages/tsconfig/package.json
 COPY packages/trpc/package.json packages/trpc/package.json
 COPY packages/domain/package.json packages/domain/package.json
 
-RUN corepack enable && corepack prepare yarn@4.12.0 --activate
+RUN npm install -g yarn@4.12.0
 RUN yarn install --immutable
 
 # --- Builder ---
 FROM base AS builder
 WORKDIR /app
 
-RUN corepack enable && corepack prepare yarn@4.12.0 --activate
+RUN npm install -g yarn@4.12.0
 
 COPY --from=deps /app/ ./
 COPY . .
