@@ -8,7 +8,7 @@
                                                            `---'                                  
 ```
 
-# TelemtrySlice
+# TelemetrySlice
 
 ## About the Project
 
